@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ZenTech Solutions LLC | Microsoft Cloud Solutions</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Sora:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --blue-deep: #0a1628;
+      --blue-mid: #0d2548;
+      --blue-brand: #1565d8;
+      --blue-bright: #2979ff;
+      --blue-light: #5c9aff;
+      --blue-pale: #dbeafe;
+      --accent: #00d4ff;
+      --accent-soft: rgba(0, 212, 255, 0.12);
+      --white: #ffffff;
+      --off-white: #f0f6ff;
+      --text-main: #0f1e35;
+      --text-muted: #5b7a9d;
+      --text-light: #8fa8c4;
+      --border: rgba(21, 101, 216, 0.15);
+      --card-bg: rgba(255,255,255,0.85);
+      --shadow: 0 4px 32px rgba(13, 37, 72, 0.08);
+      --shadow-lg: 0 16px 64px rgba(13, 37, 72, 0.14);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      color: var(--text-main);
+      background: var(--white);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 6vw;
+      height: 68px;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+      transition: box-shadow 0.3s;
+    }
+    nav.scrolled { box-shadow: 0 2px 24px rgba(13,37,72,0.10); }
+
+    .nav-logo {
+      display: flex; align-items: center; gap: 10px;
+      text-decoration: none;
+    }
+    .nav-logo-icon {
+      width: 36px; height: 36px;
+      background: linear-gradient(135deg, var(--blue-brand), var(--accent));
+      border-radius: 9px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .nav-logo-icon svg { width: 20px; height: 20px; fill: white; }
+    .nav-logo-text {
+      font-family: 'Sora', sans-serif;
+      font-size: 1.05rem; font-weight: 700;
+      color: var(--blue-deep);
+      letter-spacing: -0.02em;
+    }
+    .nav-logo-text span { color: var(--blue-brand); }
+
+    .nav-links {
+      display: flex; align-items: center; gap: 2rem;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 0.875rem; font-weight: 500;
+      color: var(--text-muted); text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--blue-brand); }
+
+    .nav-cta {
+      background: var(--blue-brand);
+      color: white !important;
+      padding: 0.45rem 1.15rem;
+      border-radius: 8px;
+      font-weight: 600 !important;
+      transition: background 0.2s, transform 0.15s !important;
+    }
+    .nav-cta:hover { background: var(--blue-bright) !important; transform: translateY(-1px); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex; align-items: center;
+      padding: 100px 6vw 80px;
+      background: linear-gradient(160deg, #f0f6ff 0%, #dbeafe 40%, #eff6ff 100%);
+      position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; top: -120px; right: -80px;
+      width: 700px; height: 700px;
+      background: radial-gradient(circle, rgba(21,101,216,0.10) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+    .hero::after {
+      content: '';
+      position: absolute; bottom: -100px; left: -60px;
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(0,212,255,0.07) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 60px; align-items: center;
+    }
+
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--accent-soft);
+      border: 1px solid rgba(0,212,255,0.3);
+      color: var(--blue-brand);
+      font-size: 0.78rem; font-weight: 600; letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 0.35rem 0.85rem;
+      border-radius: 100px; margin-bottom: 1.4rem;
+      animation: fadeUp 0.6s ease both;
+    }
+    .hero-badge::before {
+      content: '';
+      width: 6px; height: 6px;
+      background: var(--accent);
+      border-radius: 50%;
+    }
+
+    .hero h1 {
+      font-family: 'Sora', sans-serif;
+      font-size: clamp(2.2rem, 4vw, 3.4rem);
+      font-weight: 700; line-height: 1.15;
+      color: var(--blue-deep);
+      letter-spacing: -0.03em;
+      margin-bottom: 1.2rem;
+      animation: fadeUp 0.7s ease 0.1s both;
+    }
+    .hero h1 span {
+      background: linear-gradient(90deg, var(--blue-brand), var(--accent));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+
+    .hero-sub {
+      font-size: 1.05rem; color: var(--text-muted);
+      max-width: 480px; line-height: 1.75;
+      margin-bottom: 2rem;
+      animation: fadeUp 0.7s ease 0.2s both;
+    }
+
+    .hero-actions {
+      display: flex; gap: 1rem; flex-wrap: wrap;
+      animation: fadeUp 0.7s ease 0.3s both;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--blue-brand), var(--blue-bright));
+      color: white; font-weight: 600; font-size: 0.9rem;
+      padding: 0.75rem 1.75rem;
+      border-radius: 10px; border: none; cursor: pointer;
+      text-decoration: none; display: inline-flex; align-items: center; gap: 8px;
+      box-shadow: 0 4px 20px rgba(21,101,216,0.35);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(21,101,216,0.45); }
+
+    .btn-secondary {
+      background: white; color: var(--blue-brand);
+      font-weight: 600; font-size: 0.9rem;
+      padding: 0.75rem 1.75rem;
+      border-radius: 10px; border: 1.5px solid var(--border);
+      cursor: pointer; text-decoration: none;
+      display: inline-flex; align-items: center; gap: 8px;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .btn-secondary:hover { border-color: var(--blue-brand); transform: translateY(-2px); }
+
+    /* hero visual */
+    .hero-visual {
+      animation: fadeUp 0.8s ease 0.15s both;
+    }
+    .hero-card {
+      background: white;
+      border-radius: 20px;
+      box-shadow: var(--shadow-lg);
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    .hero-card-header {
+      background: linear-gradient(135deg, var(--blue-deep), var(--blue-mid));
+      padding: 1.5rem 1.75rem;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .hero-card-header-icon {
+      width: 44px; height: 44px;
+      background: rgba(255,255,255,0.12);
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .hero-card-header-icon svg { width: 24px; height: 24px; fill: var(--accent); }
+    .hero-card-title { font-family: 'Sora', sans-serif; color: white; font-weight: 600; font-size: 0.95rem; }
+    .hero-card-sub { color: rgba(255,255,255,0.55); font-size: 0.78rem; margin-top: 2px; }
+
+    .hero-card-body { padding: 1.5rem 1.75rem; }
+    .ms-product-row {
+      display: flex; align-items: center; gap: 12px;
+      padding: 0.8rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .ms-product-row:last-child { border-bottom: none; }
+    .ms-icon {
+      width: 36px; height: 36px; border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem; flex-shrink: 0;
+    }
+    .ms-icon.m365 { background: #e8f0fe; }
+    .ms-icon.azure { background: #e3f2fd; }
+    .ms-icon.teams { background: #ede7f6; }
+    .ms-icon.defender { background: #e8f5e9; }
+    .ms-product-name { font-weight: 600; font-size: 0.88rem; color: var(--blue-deep); }
+    .ms-product-desc { font-size: 0.76rem; color: var(--text-light); }
+    .ms-product-badge {
+      margin-left: auto;
+      background: var(--blue-pale);
+      color: var(--blue-brand);
+      font-size: 0.7rem; font-weight: 700;
+      padding: 0.2rem 0.6rem; border-radius: 100px;
+    }
+
+    /* ── SECTIONS COMMON ── */
+    section { padding: 90px 6vw; }
+    .section-inner { max-width: 1200px; margin: 0 auto; }
+
+    .section-label {
+      font-size: 0.75rem; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--blue-brand);
+      margin-bottom: 0.75rem;
+    }
+    .section-title {
+      font-family: 'Sora', sans-serif;
+      font-size: clamp(1.75rem, 3vw, 2.5rem);
+      font-weight: 700; line-height: 1.2;
+      color: var(--blue-deep); letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+    }
+    .section-sub {
+      font-size: 1rem; color: var(--text-muted);
+      max-width: 540px; line-height: 1.75;
+    }
+
+    /* ── SERVICES ── */
+    #services { background: var(--off-white); }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem; margin-top: 3rem;
+    }
+    .service-card {
+      background: white;
+      border-radius: 16px;
+      padding: 2rem;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .service-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+
+    .service-icon {
+      width: 52px; height: 52px;
+      border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 1.25rem;
+      font-size: 1.4rem;
+    }
+    .service-icon.blue { background: linear-gradient(135deg, #e8f0fe, #dbeafe); }
+    .service-icon.cyan { background: linear-gradient(135deg, #e0f7fa, #b2ebf2); }
+    .service-icon.indigo { background: linear-gradient(135deg, #ede7f6, #d1c4e9); }
+    .service-icon.teal { background: linear-gradient(135deg, #e0f2f1, #b2dfdb); }
+
+    .service-card h3 {
+      font-family: 'Sora', sans-serif;
+      font-size: 1.05rem; font-weight: 700;
+      color: var(--blue-deep); margin-bottom: 0.6rem;
+    }
+    .service-card p {
+      font-size: 0.875rem; color: var(--text-muted); line-height: 1.7;
+    }
+
+    /* ── WHY US ── */
+    #why { background: white; }
+
+    .why-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 60px; align-items: center; margin-top: 3rem;
+    }
+
+    .why-list { display: flex; flex-direction: column; gap: 1.5rem; }
+
+    .why-item {
+      display: flex; gap: 1rem; align-items: flex-start;
+    }
+    .why-item-num {
+      width: 36px; height: 36px; border-radius: 10px; flex-shrink: 0;
+      background: linear-gradient(135deg, var(--blue-brand), var(--blue-bright));
+      color: white; font-size: 0.8rem; font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .why-item h4 { font-weight: 700; color: var(--blue-deep); margin-bottom: 0.25rem; font-size: 0.95rem; }
+    .why-item p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.65; }
+
+    .why-visual {
+      background: linear-gradient(160deg, var(--blue-deep), var(--blue-mid));
+      border-radius: 20px; padding: 2.5rem;
+      box-shadow: var(--shadow-lg);
+    }
+    .why-visual-title {
+      font-family: 'Sora', sans-serif;
+      color: white; font-size: 1rem; font-weight: 600;
+      margin-bottom: 1.5rem;
+    }
+    .stat-row {
+      display: flex; flex-direction: column; gap: 1rem;
+    }
+    .stat-item {
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 12px; padding: 1rem 1.25rem;
+    }
+    .stat-value {
+      font-family: 'Sora', sans-serif;
+      font-size: 1.75rem; font-weight: 700;
+      background: linear-gradient(90deg, white, var(--accent));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .stat-label { font-size: 0.78rem; color: rgba(255,255,255,0.55); margin-top: 2px; }
+
+    /* ── CONTACT ── */
+    #contact { background: var(--off-white); }
+
+    .contact-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 60px; align-items: start; margin-top: 3rem;
+    }
+
+    .contact-info { display: flex; flex-direction: column; gap: 1.25rem; }
+    .contact-detail {
+      display: flex; align-items: center; gap: 12px;
+      font-size: 0.9rem; color: var(--text-muted);
+    }
+    .contact-detail-icon {
+      width: 40px; height: 40px; border-radius: 10px; flex-shrink: 0;
+      background: white; border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem;
+    }
+    .contact-detail a { color: var(--blue-brand); text-decoration: none; font-weight: 500; }
+
+    .contact-form {
+      background: white; border-radius: 16px;
+      padding: 2rem; border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+    }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .form-group { display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 1rem; }
+    .form-group label { font-size: 0.8rem; font-weight: 600; color: var(--blue-deep); }
+    .form-group input, .form-group textarea, .form-group select {
+      border: 1.5px solid var(--border);
+      border-radius: 9px; padding: 0.65rem 0.9rem;
+      font-family: inherit; font-size: 0.875rem; color: var(--text-main);
+      outline: none; transition: border-color 0.2s, box-shadow 0.2s;
+      background: var(--off-white);
+    }
+    .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+      border-color: var(--blue-brand);
+      box-shadow: 0 0 0 3px rgba(21,101,216,0.10);
+    }
+    .form-group textarea { resize: vertical; min-height: 100px; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--blue-deep);
+      color: rgba(255,255,255,0.6);
+      padding: 48px 6vw;
+    }
+    .footer-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: flex; justify-content: space-between;
+      align-items: center; flex-wrap: wrap; gap: 1rem;
+    }
+    .footer-logo {
+      font-family: 'Sora', sans-serif;
+      color: white; font-weight: 700; font-size: 1rem;
+    }
+    .footer-logo span { color: var(--accent); }
+    .footer-links { display: flex; gap: 1.5rem; }
+    .footer-links a {
+      color: rgba(255,255,255,0.5); text-decoration: none;
+      font-size: 0.82rem; transition: color 0.2s;
+    }
+    .footer-links a:hover { color: white; }
+    .footer-copy { font-size: 0.78rem; }
+
+    /* ── TRUST BAR ── */
+    .trust-bar {
+      background: white;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 1.5rem 6vw;
+    }
+    .trust-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: flex; align-items: center; gap: 2rem;
+      flex-wrap: wrap; justify-content: center;
+    }
+    .trust-label { font-size: 0.78rem; font-weight: 600; color: var(--text-light); letter-spacing: 0.05em; text-transform: uppercase; }
+    .trust-badges { display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; }
+    .trust-badge {
+      display: flex; align-items: center; gap: 6px;
+      font-size: 0.82rem; font-weight: 600; color: var(--text-muted);
+    }
+    .trust-badge-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--blue-brand), var(--accent));
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(22px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .hero-inner { grid-template-columns: 1fr; }
+      .hero-visual { display: none; }
+      .why-grid, .contact-grid { grid-template-columns: 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#" class="nav-logo">
+    <div class="nav-logo-icon">
+      <svg viewBox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+    </div>
+    <span class="nav-logo-text">Zen<span>Tech</span></span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#why">Why Us</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#contact" class="nav-cta">Get Started</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-inner">
+    <div class="hero-content">
+      <div class="hero-badge">Microsoft Certified Partner</div>
+      <h1>Cloud Solutions <span>Built for Your Business</span></h1>
+      <p class="hero-sub">ZenTech Solutions helps organizations of all sizes adopt, manage, and scale Microsoft cloud technologies — without the complexity.</p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn-primary">
+          Get a Free Consultation
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href="#services" class="btn-secondary">View Services</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-card">
+        <div class="hero-card-header">
+          <div class="hero-card-header-icon">
+            <svg viewBox="0 0 24 24"><path d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"/></svg>
+          </div>
+          <div>
+            <div class="hero-card-title">Microsoft CSP Portfolio</div>
+            <div class="hero-card-sub">zentechsol.com · Active Partner</div>
+          </div>
+        </div>
+        <div class="hero-card-body">
+          <div class="ms-product-row">
+            <div class="ms-icon m365">💼</div>
+            <div>
+              <div class="ms-product-name">Microsoft 365</div>
+              <div class="ms-product-desc">Productivity & collaboration suite</div>
+            </div>
+            <div class="ms-product-badge">CSP</div>
+          </div>
+          <div class="ms-product-row">
+            <div class="ms-icon azure">☁️</div>
+            <div>
+              <div class="ms-product-name">Microsoft Azure</div>
+              <div class="ms-product-desc">Cloud infrastructure & services</div>
+            </div>
+            <div class="ms-product-badge">CSP</div>
+          </div>
+          <div class="ms-product-row">
+            <div class="ms-icon teams">💬</div>
+            <div>
+              <div class="ms-product-name">Microsoft Teams</div>
+              <div class="ms-product-desc">Communication & meetings</div>
+            </div>
+            <div class="ms-product-badge">CSP</div>
+          </div>
+          <div class="ms-product-row">
+            <div class="ms-icon defender">🛡️</div>
+            <div>
+              <div class="ms-product-name">Microsoft Defender</div>
+              <div class="ms-product-desc">Security & threat protection</div>
+            </div>
+            <div class="ms-product-badge">CSP</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST BAR -->
+<div class="trust-bar">
+  <div class="trust-inner">
+    <span class="trust-label">Trusted by</span>
+    <div class="trust-badges">
+      <div class="trust-badge"><div class="trust-badge-dot"></div> Small Businesses</div>
+      <div class="trust-badge"><div class="trust-badge-dot"></div> Startups</div>
+      <div class="trust-badge"><div class="trust-badge-dot"></div> Remote Teams</div>
+      <div class="trust-badge"><div class="trust-badge-dot"></div> Professional Services</div>
+      <div class="trust-badge"><div class="trust-badge-dot"></div> Healthcare Orgs</div>
+    </div>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="section-inner">
+    <div class="section-label">What We Offer</div>
+    <h2 class="section-title">Microsoft Cloud Services,<br>Simplified</h2>
+    <p class="section-sub">As a Microsoft Cloud Solution Provider, we handle licensing, setup, and ongoing support so you can focus on running your business.</p>
+
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-icon blue">💼</div>
+        <h3>Microsoft 365 Licensing</h3>
+        <p>Get the right M365 plan for your team — Business Basic, Standard, Premium, or Enterprise. We handle provisioning, user setup, and ongoing management.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon cyan">☁️</div>
+        <h3>Azure Cloud Setup</h3>
+        <p>From virtual machines to cloud storage, we help your organization move to Azure with a plan that fits your workload and budget.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon indigo">🔐</div>
+        <h3>Identity & Security</h3>
+        <p>Protect your team with Microsoft Entra ID, Defender, Conditional Access, and MFA — configured and managed by our team.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon teal">📞</div>
+        <h3>Ongoing Support</h3>
+        <p>We're your first point of contact for Microsoft issues. No call centers — just direct, knowledgeable support from our team.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section id="why">
+  <div class="section-inner">
+    <div class="why-grid">
+      <div>
+        <div class="section-label">Why ZenTech</div>
+        <h2 class="section-title">A Partner That Stays in Your Corner</h2>
+        <p class="section-sub">We're not a big-box reseller. We're a focused Microsoft CSP partner that gives your business real attention.</p>
+        <div class="why-list" style="margin-top: 2rem;">
+          <div class="why-item">
+            <div class="why-item-num">01</div>
+            <div>
+              <h4>Direct Licensing, No Middleman Markup</h4>
+              <p>As a certified CSP partner, we source directly from Microsoft and pass competitive pricing to you.</p>
+            </div>
+          </div>
+          <div class="why-item">
+            <div class="why-item-num">02</div>
+            <div>
+              <h4>Flexible Month-to-Month Options</h4>
+              <p>Scale licenses up or down as your team grows. No long-term contracts required.</p>
+            </div>
+          </div>
+          <div class="why-item">
+            <div class="why-item-num">03</div>
+            <div>
+              <h4>Hands-On Onboarding</h4>
+              <p>We don't just hand you a login. We get your team set up, migrated, and trained.</p>
+            </div>
+          </div>
+          <div class="why-item">
+            <div class="why-item-num">04</div>
+            <div>
+              <h4>Single Point of Contact</h4>
+              <p>One email, one team. We handle Microsoft on your behalf so you never have to call support yourself.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="why-visual">
+        <div class="why-visual-title">At a Glance</div>
+        <div class="stat-row">
+          <div class="stat-item">
+            <div class="stat-value">M365 + Azure</div>
+            <div class="stat-label">Full Microsoft CSP portfolio available</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value">SMB Focused</div>
+            <div class="stat-label">Tailored for small & mid-sized businesses</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value">Fast Setup</div>
+            <div class="stat-label">Onboard your team in days, not weeks</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value">Certified</div>
+            <div class="stat-label">Microsoft Cloud Solution Provider partner</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-inner">
+    <div class="section-label">Get in Touch</div>
+    <h2 class="section-title">Ready to Move to the Cloud?</h2>
+    <p class="section-sub">Reach out and we'll get back to you within one business day.</p>
+
+    <div class="contact-grid">
+      <div class="contact-info">
+        <p style="font-size:0.95rem; color:var(--text-muted); line-height:1.75; margin-bottom:0.5rem;">Whether you're evaluating Microsoft 365 for the first time or looking to optimize your existing Azure environment, we're here to help — no pressure, no sales pitch.</p>
+        <div class="contact-detail">
+          <div class="contact-detail-icon">📧</div>
+          <span>Email us at <a href="mailto:info@zentechsol.com">info@zentechsol.com</a></span>
+        </div>
+        <div class="contact-detail">
+          <div class="contact-detail-icon">🌐</div>
+          <span><a href="https://zentechsol.com">zentechsol.com</a> · Rancho Santa Margarita, CA</span>
+        </div>
+        <div class="contact-detail">
+          <div class="contact-detail-icon">⏱️</div>
+          <span>We typically respond within 1 business day</span>
+        </div>
+      </div>
+
+      <div class="contact-form">
+        <div class="form-row">
+          <div class="form-group">
+            <label>First Name</label>
+            <input type="text" placeholder="John">
+          </div>
+          <div class="form-group">
+            <label>Last Name</label>
+            <input type="text" placeholder="Smith">
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Work Email</label>
+          <input type="email" placeholder="john@company.com">
+        </div>
+        <div class="form-group">
+          <label>Company</label>
+          <input type="text" placeholder="Your Company">
+        </div>
+        <div class="form-group">
+          <label>What are you looking for?</label>
+          <select>
+            <option value="">Select a service...</option>
+            <option>Microsoft 365 Licensing</option>
+            <option>Azure Cloud Services</option>
+            <option>Security & Identity</option>
+            <option>Migration Help</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Message (optional)</label>
+          <textarea placeholder="Tell us a bit about your team or what you need..."></textarea>
+        </div>
+        <a href="mailto:info@zentechsol.com" class="btn-primary" style="width:100%; justify-content:center;">
+          Send Message
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">Zen<span>Tech</span> Solutions LLC</div>
+      <div style="font-size:0.78rem; margin-top:4px;">Microsoft Cloud Solution Provider · zentechsol.com</div>
+    </div>
+    <div class="footer-links">
+      <a href="#services">Services</a>
+      <a href="#why">About</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <div class="footer-copy">© 2025 ZenTech Solutions LLC. All rights reserved.</div>
+  </div>
+</footer>
+
+<script>
+  const nav = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 30);
+  });
+</script>
+
+</body>
+</html>
